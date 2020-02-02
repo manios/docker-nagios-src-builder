@@ -21,7 +21,7 @@ ENV NAGIOS_HOME=/opt/nagios \
     NAGIOSADMIN_PASS=nagios \
     NAGIOS_BRANCH=nagios-4.4.5 \
     NAGIOS_PLUGINS_BRANCH=release-2.3.1 \
-    NRPE_BRANCH=nrpe-3.2.1 \
+    NRPE_BRANCH=nrpe-4.0.0 \
     APACHE_LOCK_DIR=/var/run \
     APACHE_LOG_DIR=/var/log/apache2
 
