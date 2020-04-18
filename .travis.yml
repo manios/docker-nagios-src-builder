@@ -31,9 +31,11 @@ before_script:
   - ls -l
   - docker version
   - chmod 744 build.sh
+  - chmod 744 multi-arch-docker-ci.sh
 
 script:
-  - ./build.sh
+  # - ./build.sh
+  - ./multi-arch-docker-ci.sh
 
 # after_script:
 
