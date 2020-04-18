@@ -14,8 +14,18 @@ addons:
 # https://www.docker.com/blog/docker-arm-virtual-meetup-multi-arch-with-buildx/
 # https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
 
+# https://github.com/docker/buildx/issues/138
+# https://github.com/zalando/skipper/pull/1416/files
+
 before_script:
   # - sudo apt-get install docker-ce=19.03.8~ce-0~ubuntu
+  -	echo "##### show infos #####"
+  -	lsb_release -a
+  -	uname -a
+  -	ls /proc/sys/fs/binfmt_misc/
+  -	cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+  -	docker buildx ls
+  -	echo "##### END infos #####"
   - curl -SsL https://get.docker.com | bash
   - sudo usermod -aG docker travis
   - ls -l

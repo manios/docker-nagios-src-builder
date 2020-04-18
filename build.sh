@@ -38,6 +38,8 @@ echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
+[ $$(which qemu-aarch64-static) ] || echo "please install qemu-user-static"
+
 docker buildx build --push --progress plain --platform linux/arm/v6,linux/arm/v7,linux/amd64 -t manios/nagios-src-builder:bob-pasxa  . 
 
 docker logout
