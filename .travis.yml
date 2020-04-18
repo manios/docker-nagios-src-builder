@@ -6,6 +6,7 @@ addons:
   apt:
     packages:
       - docker-ce
+      - qemu-user-static
 
 # env:
 #   - VERSION=4.4.5-tz DOCKERFILE_PATH="./Dockerfile" IMAGE_NAME="manios/nagios:$VERSION"
@@ -22,7 +23,7 @@ before_script:
   - lsb_release -a
   - uname -a
   - ls /proc/sys/fs/binfmt_misc/
-  - cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+  # - cat /proc/sys/fs/binfmt_misc/qemu-aarch64
   - docker buildx ls
   - echo "=== END infos ==="
   - curl -SsL https://get.docker.com | bash
