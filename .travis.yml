@@ -10,8 +10,10 @@ addons:
 # env:
 #   - VERSION=4.4.5-tz DOCKERFILE_PATH="./Dockerfile" IMAGE_NAME="manios/nagios:$VERSION"
 
-# before_script:
-  
+before_script:
+  - ls -l
+  - chmod 744 build.sh
+
 script:
   - build.sh
 
