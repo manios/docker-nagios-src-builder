@@ -15,7 +15,7 @@ before_script:
   - chmod 744 build.sh
 
 script:
-  - build.sh
+  - ./build.sh
 
 # after_script:
 
