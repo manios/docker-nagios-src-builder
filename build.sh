@@ -22,6 +22,9 @@ ls -l
 # Register qemu-*-static for all supported processors except the 
 # current one, but also remove all registered binfmt_misc before
 
+# EXIT PREMATURELY
+exit 0
+
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 docker version
