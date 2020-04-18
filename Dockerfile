@@ -10,7 +10,7 @@ FROM $FROM_IMAGE_NAME as mybase
 
 # DO NOT REMOVE THE FOLLOWING LINE
 # VITAL FOR BUILDING ARM IMAGES
-COPY qemu-arm-static /usr/bin/
+# COPY qemu-arm-static /usr/bin/
 
 ENV NAGIOS_HOME=/opt/nagios \
     NAGIOS_USER=nagios \
