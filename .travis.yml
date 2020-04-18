@@ -10,8 +10,12 @@ addons:
 # env:
 #   - VERSION=4.4.5-tz DOCKERFILE_PATH="./Dockerfile" IMAGE_NAME="manios/nagios:$VERSION"
 
+# https://medium.com/@gauravsj9/how-to-install-specific-docker-version-on-linux-machine-d0ec2d4095
+# https://www.docker.com/blog/docker-arm-virtual-meetup-multi-arch-with-buildx/
+
 before_script:
-  - sudo apt-get install docker-ce=19.03.8~ce-0~ubuntu
+  # - sudo apt-get install docker-ce=19.03.8~ce-0~ubuntu
+  - curl -SsL https://get.docker.com | bash
   - ls -l
   - chmod 744 build.sh
 
