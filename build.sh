@@ -26,9 +26,10 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset --crede
 
 docker version
 
-docker pull --platform linux/arm/v6 alpine:latest
+# https://github.com/travis-ci/travis-ci/issues/8740
+# docker pull --platform linux/arm/v6 alpine:latest
 
-docker pull --platform linux/arm/v7 alpine:latest
+# docker pull --platform linux/arm/v7 alpine:latest
 
 docker buildx create --name armos --platform linux/arm/v6,linux/arm/v7,linux/amd64
 
