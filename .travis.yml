@@ -18,13 +18,13 @@ addons:
 # https://github.com/zalando/skipper/pull/1416/files
 
 before_script:
-  -	echo "=== show infos ==="
-  -	lsb_release -a
-  -	uname -a
-  -	ls /proc/sys/fs/binfmt_misc/
-  -	cat /proc/sys/fs/binfmt_misc/qemu-aarch64
-  -	docker buildx ls
-  -	echo "=== END infos ==="
+  - echo "=== show infos ==="
+  - lsb_release -a
+  - uname -a
+  - ls /proc/sys/fs/binfmt_misc/
+  - cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+  - docker buildx ls
+  - echo "=== END infos ==="
   - curl -SsL https://get.docker.com | bash
   - sudo usermod -aG docker travis
   - ls -l
