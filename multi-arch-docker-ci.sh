@@ -80,7 +80,7 @@ function multi_arch_docker::buildx() {
     --platform "${DOCKER_PLATFORMS// /,}" \
     --push \
     --progress plain \
-    -f Dockerfile.multi-arch \
+    -f Dockerfile \
     "$@" \
     .
 }
