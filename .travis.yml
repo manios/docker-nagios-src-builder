@@ -11,6 +11,7 @@ addons:
 #   - VERSION=4.4.5-tz DOCKERFILE_PATH="./Dockerfile" IMAGE_NAME="manios/nagios:$VERSION"
 
 before_script:
+  - sudo apt-get install docker-ce=19.03.8~ce-0~ubuntu
   - ls -l
   - chmod 744 build.sh
 

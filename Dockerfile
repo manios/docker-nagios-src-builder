@@ -4,6 +4,8 @@ ARG FROM_IMAGE_NAME=alpine:latest
 ###   STAGE 1 CREATE PARENT IMAGE      ###
 ### ================================== ###
 
+# https://www.docker.com/blog/docker-arm-virtual-meetup-multi-arch-with-buildx/
+
 FROM $FROM_IMAGE_NAME as mybase
 
 # DO NOT REMOVE THE FOLLOWING LINE
