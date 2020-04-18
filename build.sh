@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -eu
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+
+
+# QEMU version variables
+QEMU_EXE=qemu-arm-static
+QEMU_VERSION=v4.2.0-6
+
+# download qemu
+curl -L https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/${QEMU_EXE}.tar.gz | tar zxvf - -C .
+
+# https://stackoverflow.com/questions/37935415/bash-regex-string-variable-match
+
+# download estep/manifest-tool
+curl -L https://github.com/estesp/manifest-tool/releases/download/v1.0.0/manifest-tool-linux-amd64 -o manifest-tool && \
+chmod 744 manifest-tool && \
+ls -l
+
+# Register qemu-*-static for all supported processors except the 
+# current one, but also remove all registered binfmt_misc before
+
+docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+
+
+docker buildx create --name armos --platform linux/arm/v6,linux/arm/v7,linux/amd64
+
+docker buildx use armos
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+
+docker buildx build --push --platform linux/arm/v6,linux/arm/v7,linux/amd64 -t manios/nagios:bob-pasxa  . 
+
+docker logout
