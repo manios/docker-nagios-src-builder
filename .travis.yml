@@ -16,7 +16,9 @@ addons:
 before_script:
   # - sudo apt-get install docker-ce=19.03.8~ce-0~ubuntu
   - curl -SsL https://get.docker.com | bash
+  - sudo usermod -aG docker travis
   - ls -l
+  - docker version
   - chmod 744 build.sh
 
 script:

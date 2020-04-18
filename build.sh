@@ -24,6 +24,7 @@ ls -l
 
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
+docker version
 
 docker buildx create --name armos --platform linux/arm/v6,linux/arm/v7,linux/amd64
 
@@ -33,6 +34,6 @@ echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
-docker buildx build --push --platform linux/arm/v6,linux/arm/v7,linux/amd64 -t manios/nagios:bob-pasxa  . 
+docker buildx build --push --platform linux/arm/v6,linux/arm/v7,linux/amd64 -t manios/nagios-src-builder:bob-pasxa  . 
 
 docker logout
