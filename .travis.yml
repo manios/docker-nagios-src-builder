@@ -35,7 +35,9 @@ before_script:
 
 script:
   # - ./build.sh
-  - ./multi-arch-docker-ci.sh
+  - source ./multi-arch-docker-ci.sh
+  - set -ex; multi_arch_docker::main; set +x
+
 
 # after_script:
 
