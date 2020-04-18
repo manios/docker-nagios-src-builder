@@ -30,6 +30,8 @@ docker buildx create --name armos --platform linux/arm/v6,linux/arm/v7,linux/amd
 
 docker buildx use armos
 
+docker buildx ls
+
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
