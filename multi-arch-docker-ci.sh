@@ -18,9 +18,6 @@
 # More information about Linux environment constraints can be found at:
 # https://nexus.eddiesinentropy.net/2020/01/12/Building-Multi-architecture-Docker-Images-With-Buildx/
 
-DOCKER_BASE=manios/nagios-src-builder
-TAGS=pasxa
-
 function _version() {
   printf '%02d' $(echo "$1" | tr . ' ' | sed -e 's/ 0*/ /g') 2>/dev/null
 }
@@ -120,14 +117,17 @@ function multi_arch_docker::test_all() {
 }
 
 function multi_arch_docker::main() {
-  # Set docker platforms for which to build.
-  export DOCKER_PLATFORMS='linux/amd64'
-  DOCKER_PLATFORMS+=' linux/arm/v7'
-  DOCKER_PLATFORMS+=' linux/arm/v6'
 
   multi_arch_docker::install_docker_buildx
   multi_arch_docker::login_to_docker_hub
   multi_arch_docker::build_and_push_all
   set +x
   multi_arch_docker::test_all
+}
+
+function multi_arch_docker::printvars() {
+    echo "multi_arch_docker variables:"
+    echo "DOCKER_PLATFORMS: ${DOCKER_PLATFORMS}"
+    echo "DOCKER_BASE: ${DOCKER_BASE}"
+    echo "TAGS: ${TAGS}"
 }

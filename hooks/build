@@ -1,9 +1,11 @@
 #!/bin/bash
 
-MYVARSFILE=imagevars.sh
-if [ -f ${MYVARSFILE} ]; then
-    echo "Loading custom image name from file ${MYVARSFILE}"
-    . ${MYVARSFILE}
-fi
+DOCKER_PLATFORMS=`echo $DOCKER_TAG | sed 's/^[^-]*-//'`
+DOCKER_PLATFORMS=${DOCKER_PLATFORMS//-/\/}
+TAGS=${DOCKER_TAG}
+DOCKER_BASE=${DOCKER_REPO}
 
-docker build --build-arg FROM_IMAGE_NAME="${ALPINE_IMAGE_NAME}" -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+source ../multi-arch-docker-ci.sh
+
+set -ex; multi_arch_docker::printvars; set +x
+set -ex; multi_arch_docker::main; set +x
