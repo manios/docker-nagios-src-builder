@@ -12,7 +12,7 @@ ls -l
 echo " =============== pwd ../"
 ls -l ../
 
-source ../multi-arch-docker-ci.sh
+source ./multi-arch-docker-ci.sh
 
 set -ex; multi_arch_docker::printvars; set +x
 set -ex; multi_arch_docker::main; set +x
