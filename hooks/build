@@ -5,6 +5,13 @@ DOCKER_PLATFORMS=${DOCKER_PLATFORMS//-/\/}
 TAGS=${DOCKER_TAG}
 DOCKER_BASE=${DOCKER_REPO}
 
+echo " =============== pwd"
+pwd
+ls -l
+
+echo " =============== pwd ../"
+ls -l ../
+
 source ../multi-arch-docker-ci.sh
 
 set -ex; multi_arch_docker::printvars; set +x
