@@ -24,11 +24,11 @@ function _version() {
 
 function multi_arch_docker::install_docker_buildx() {
   # Check kernel version.
-  local -r kernel_version="$(uname -r)"
-  if [[ "$(_version "$kernel_version")" < "$(_version '4.8')" ]]; then
-    echo "Kernel $kernel_version too old - need >= 4.8."
-    exit 1
-  fi
+#   local -r kernel_version="$(uname -r)"
+#   if [[ "$(_version "$kernel_version")" < "$(_version '4.8')" ]]; then
+#     echo "Kernel $kernel_version too old - need >= 4.8."
+#     exit 1
+#   fi
 
   # Install up-to-date version of docker, with buildx support.
   local -r docker_apt_repo='https://download.docker.com/linux/ubuntu'
