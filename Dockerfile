@@ -1,12 +1,10 @@
-ARG FROM_IMAGE_NAME=alpine:latest
-    
 ### ================================== ###
 ###   STAGE 1 CREATE PARENT IMAGE      ###
 ### ================================== ###
 
 # https://www.docker.com/blog/docker-arm-virtual-meetup-multi-arch-with-buildx/
 
-FROM $FROM_IMAGE_NAME as mybase
+FROM --platform=$BUILDPLATFORM alpine as builder-base
 
 ENV NAGIOS_HOME=/opt/nagios \
     NAGIOS_USER=nagios \
@@ -41,7 +39,7 @@ RUN addgroup -S ${NAGIOS_GROUP} && \
 ###   STAGE 2 COMPILE NAGIOS SOURCES   ###
 ### ================================== ###
 
-FROM mybase as sourcebuilder
+FROM builder-base as builder-compile
 
 MAINTAINER Christos Manios <maniopaido@gmail.com>
 

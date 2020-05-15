@@ -1,0 +1,25 @@
+name: Nagios Build
+# This workflow is triggered on pushes to the repository.
+# Taken from tutorial
+# https://github.com/gitschooldude/hello
+# https://www.youtube.com/watch?v=-xIXFxuZCMI
+on: [push]
+
+jobs:
+  build-and-run:
+    name: Build image and deploy to DockerHub
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_PLATFORMS: 'linux/amd64,linux/arm/v6,linux/arm/v7'
+      DOCKER_BASE: 'manios/nagios'
+      TAGS: 'energeia'
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set permissions
+        run: chmod 744 multi-arch-docker-ci.sh
+      - name: Include build code
+        run: source ./multi-arch-docker-ci.sh
+      - name: Run build
+        run: set -ex; multi_arch_docker::main; set +x
