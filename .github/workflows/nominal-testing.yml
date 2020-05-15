@@ -28,7 +28,7 @@ jobs:
           multi_arch_docker::login_to_docker_hub
           multi_arch_docker::stage-buildx
           set +x
-        - name: Build actual image
+      - name: Build actual image
         run: |
           source ./multi-arch-docker-ci.sh
           set -ex
