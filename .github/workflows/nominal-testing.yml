@@ -20,6 +20,6 @@ jobs:
       - name: Set permissions
         run: chmod 744 multi-arch-docker-ci.sh
       - name: Include build code
-        run: source ./multi-arch-docker-ci.sh
-      - name: Run build
-        run: set -ex; multi_arch_docker::main; set +x
+        run: |
+          source ./multi-arch-docker-ci.sh
+          set -ex; multi_arch_docker::main; set +x
