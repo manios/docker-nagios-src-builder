@@ -20,6 +20,8 @@ jobs:
       - name: Set permissions
         run: chmod 744 multi-arch-docker-ci.sh
       - name: Build first stage image
+        env:
+          TAGS: 'builder-base'
         run: |
           source ./multi-arch-docker-ci.sh
           set -ex
