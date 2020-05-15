@@ -76,7 +76,18 @@ function multi_arch_docker::buildx() {
   docker buildx build \
     --platform "${DOCKER_PLATFORMS// /,}" \
     --cache-from=type=registry,ref="${DOCKER_BASE}":builder-compile \
-    --cache-to=type=registry,ref="${DOCKER_BASE}":builder-compile,mode=max \
+    --push \
+    --progress plain \
+    -f Dockerfile \
+    "$@" \
+    .
+}
+
+function multi_arch_docker::stage-buildx() {
+  docker buildx build \
+    --platform "${DOCKER_PLATFORMS// /,}" \
+    --cache-from=type=registry,ref="${DOCKER_BASE}":builder-base \
+    --target "${DOCKER_BASE}":builder-base \
     --push \
     --progress plain \
     -f Dockerfile \
@@ -124,6 +135,7 @@ function multi_arch_docker::logout_from_docker_hub() {
 
 function multi_arch_docker::main() {
 
+  multi_arch_docker::printvars
   multi_arch_docker::install_docker_buildx
   multi_arch_docker::login_to_docker_hub
   multi_arch_docker::build_and_push_all
