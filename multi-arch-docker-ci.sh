@@ -91,7 +91,7 @@ function multi_arch_docker::stage-buildx() {
     --push \
     --progress plain \
     -f Dockerfile \
-    -t "$DOCKER_BASE:$tag" \
+    -t "$DOCKER_BASE:$TAGS" \
     .
 }
 
