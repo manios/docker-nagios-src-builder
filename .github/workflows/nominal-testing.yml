@@ -39,15 +39,15 @@ jobs:
           echo "=== Build stache builder-base ==="
           echo "===================================="
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker build --platform="linux-amd64" \
+          docker build --platform="linux/amd64" \
             --target "builder-base:$TAGS-linux-amd64" \
             --cache-from="manios/nagios:$TAGS-linux-amd64" \
             -t "manios/nagios:$TAGS-linux-amd64" .
-          docker build --platform="linux-arm-v6" \
+          docker build --platform="linux/arm/v6" \
             --target "builder-base:$TAGS-linux-arm-v6" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
             -t "manios/nagios:$TAGS-linux-arm-v6" .
-          docker build --platform="linux-arm-v7" \
+          docker build --platform="linux/arm/v7" \
             --target "builder-base:$TAGS-linux-arm-v7" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
             -t "manios/nagios:$TAGS-linux-arm-v7" .
@@ -62,17 +62,17 @@ jobs:
           echo "=== Build stache builder-compile ==="
           echo "===================================="
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker build --platform="linux-amd64" \
+          docker build --platform="linux/amd64" \
             --target "builder-compile:$TAGS-linux-amd64" \
             --cache-from="manios/nagios:$TAGS-linux-amd64" \
             --cache-from="manios/nagios:$TAGS-linux-amd64" \
             -t "manios/nagios:$TAGS-linux-amd64" .
-          docker build --platform="linux-arm-v6" \
+          docker build --platform="linux/arm/v6" \
             --target "builder-compile:$TAGS-linux-arm-v6" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
             -t "manios/nagios:$TAGS-linux-arm-v6" .
-          docker build --platform="linux-arm-v7" \
+          docker build --platform="linux/arm/v7" \
             --target "builder-compile:$TAGS-linux-arm-v7" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
             --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
