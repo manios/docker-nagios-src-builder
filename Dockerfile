@@ -6,7 +6,7 @@
 
 ARG PLATFORM_DASH=linux-amd64
 
-FROM --platform=$BUILDPLATFORM alpine as builder-base
+FROM alpine as builder-base
 
 ENV NAGIOS_HOME=/opt/nagios \
     NAGIOS_USER=nagios \
