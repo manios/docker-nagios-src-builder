@@ -4,7 +4,9 @@
 
 # https://www.docker.com/blog/docker-arm-virtual-meetup-multi-arch-with-buildx/
 
-FROM --platform=$BUILDPLATFORM alpine as builder-base
+ARG PLATFORM_DASH=linux-amd64
+
+FROM --platform=$BUILDPLATFORM alpine as manios/nagios:builder-base-$PLATFORM_DASH
 
 ENV NAGIOS_HOME=/opt/nagios \
     NAGIOS_USER=nagios \
@@ -44,7 +46,7 @@ RUN addgroup -S ${NAGIOS_GROUP} && \
 ###   STAGE 2 COMPILE NAGIOS SOURCES   ###
 ### ================================== ###
 
-FROM builder-base as builder-compile
+FROM manios/nagios:builder-base-$PLATFORM_DASH as manios/nagios:builder-compile-$PLATFORM_DASH
 
 MAINTAINER Christos Manios <maniopaido@gmail.com>
 
