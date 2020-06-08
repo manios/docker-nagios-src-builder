@@ -40,17 +40,17 @@ jobs:
           echo "===================================="
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker build --platform="linux/amd64" \
-            --arg PLATFORM_DASH="linux-amd64" \
+            --build-arg PLATFORM_DASH="linux-amd64" \
             --target "manios/nagios:$TAGS-$PLATFORM_DASH" \
             --cache-from="manios/nagios:$TAGS-$PLATFORM_DASH" \
             -t "manios/nagios:$TAGS-$PLATFORM_DASH" .
           docker build --platform="linux/arm/v6" \
-            --arg PLATFORM_DASH="linux-arm-v6" \
+            --build-arg PLATFORM_DASH="linux-arm-v6" \
             --target "manios/nagios:$TAGS-$PLATFORM_DASH" \
             --cache-from="manios/nagios:$TAGS-$PLATFORM_DASH" \
             -t "manios/nagios:$TAGS-$PLATFORM_DASH" .
           docker build --platform="linux/arm/v7" \
-            --arg PLATFORM_DASH="linux-arm-v7" \
+            --build-arg PLATFORM_DASH="linux-arm-v7" \
             --target "manios/nagios:$TAGS-$PLATFORM_DASH" \
             --cache-from="manios/nagios:$TAGS-$PLATFORM_DASH" \
             -t "manios/nagios:$TAGS-$PLATFORM_DASH" .
