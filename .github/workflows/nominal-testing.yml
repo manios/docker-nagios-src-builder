@@ -32,6 +32,8 @@ jobs:
           echo "Tags are $TAGS"
           set +x
       - name: Build builder-base image
+        env:
+          TAGS: 'builder-base'      
         run: |
           echo "===================================="
           echo "=== Build stache builder-base ==="
@@ -39,20 +41,22 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker build --platform="linux-amd64" \
             --target "builder-base:$TAGS-linux-amd64" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-amd64" \
-            -t "manios/nagios:builder-base:$TAGS-linux-amd64" .
+            --cache-from="manios/nagios:$TAGS-linux-amd64" \
+            -t "manios/nagios:$TAGS-linux-amd64" .
           docker build --platform="linux-arm-v6" \
             --target "builder-base:$TAGS-linux-arm-v6" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-arm-v6" \
-            -t "manios/nagios:builder-base:$TAGS-linux-arm-v6" .
+            --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
+            -t "manios/nagios:$TAGS-linux-arm-v6" .
           docker build --platform="linux-arm-v7" \
             --target "builder-base:$TAGS-linux-arm-v7" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-arm-v7" \
-            -t "manios/nagios:builder-base:$TAGS-linux-arm-v7" .
-          docker push "manios/nagios:builder-base:$TAGS-linux-amd64"
-          docker push "manios/nagios:builder-base:$TAGS-linux-arm-v6"
-          docker push "manios/nagios:builder-base:$TAGS-linux-arm-v7"
+            --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
+            -t "manios/nagios:$TAGS-linux-arm-v7" .
+          docker push "manios/nagios:$TAGS-linux-amd64"
+          docker push "manios/nagios:$TAGS-linux-arm-v6"
+          docker push "manios/nagios:$TAGS-linux-arm-v7"
       - name: Build builder-compile image
+        env:
+          TAGS: 'builder-compile'        
         run: |
           echo "===================================="
           echo "=== Build stache builder-compile ==="
@@ -60,22 +64,22 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker build --platform="linux-amd64" \
             --target "builder-compile:$TAGS-linux-amd64" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-amd64" \
-            --cache-from="manios/nagios:builder-compile:$TAGS-linux-amd64" \
-            -t "manios/nagios:builder-compile:$TAGS-linux-amd64" .
+            --cache-from="manios/nagios:$TAGS-linux-amd64" \
+            --cache-from="manios/nagios:$TAGS-linux-amd64" \
+            -t "manios/nagios:$TAGS-linux-amd64" .
           docker build --platform="linux-arm-v6" \
             --target "builder-compile:$TAGS-linux-arm-v6" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-arm-v6" \
-            --cache-from="manios/nagios:builder-compile:$TAGS-linux-arm-v6" \
-            -t "manios/nagios:builder-compile:$TAGS-linux-arm-v6" .
+            --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
+            --cache-from="manios/nagios:$TAGS-linux-arm-v6" \
+            -t "manios/nagios:$TAGS-linux-arm-v6" .
           docker build --platform="linux-arm-v7" \
             --target "builder-compile:$TAGS-linux-arm-v7" \
-            --cache-from="manios/nagios:builder-base:$TAGS-linux-arm-v7" \
-            --cache-from="manios/nagios:builder-compile:$TAGS-linux-arm-v7" \
-            -t "manios/nagios:builder-compile:$TAGS-linux-arm-v7" .
-          docker push "manios/nagios:builder-base:$TAGS-linux-amd64"
-          docker push "manios/nagios:builder-compile:$TAGS-linux-arm-v6"  
-          docker push "manios/nagios:builder-compile:$TAGS-linux-arm-v7"
+            --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
+            --cache-from="manios/nagios:$TAGS-linux-arm-v7" \
+            -t "manios/nagios:$TAGS-linux-arm-v7" .
+          docker push "manios/nagios:$TAGS-linux-amd64"
+          docker push "manios/nagios:$TAGS-linux-arm-v6"  
+          docker push "manios/nagios:$TAGS-linux-arm-v7"
       # - name: Build actual image
       #   run: |
       #     source ./multi-arch-docker-ci.sh
