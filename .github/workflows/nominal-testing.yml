@@ -31,8 +31,6 @@ jobs:
           multi_arch_docker::printvars
           echo "Tags are $TAGS"
           set +x
-      - name: Build builder-base image
-        run: |
           echo "===================================="
           echo "=== Build stache builder-base ==="
           echo "===================================="
@@ -52,8 +50,6 @@ jobs:
           docker push "manios/nagios:builder-base:$TAGS-linux-amd64"
           docker push "manios/nagios:builder-base:$TAGS-linux-arm-v6"
           docker push "manios/nagios:builder-base:$TAGS-linux-arm-v7"
-      - name: Build builder-compile image
-        run: |
           echo "===================================="
           echo "=== Build stache builder-compile ==="
           echo "===================================="
