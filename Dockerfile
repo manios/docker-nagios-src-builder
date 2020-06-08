@@ -28,10 +28,15 @@ RUN addgroup -S ${NAGIOS_GROUP} && \
     apk add --no-cache git curl unzip apache2 apache2-utils rsyslog \
                         php7 php7-gd php7-cli runit parallel ssmtp \
                         libltdl libintl openssl-dev php7-apache2 procps && \
-    wget https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 && \
+    : '# For x64 the binary is : gosu-amd64' && \
+    : '# For arm-v6 the binary is : gosu-armel' && \
+    : '# For arm-v7 the binary is : gosu-armhf' && \                        
+    curl -L -o gosu-linux-amd64 "https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64"  && \
+    curl -L -o gosu-linux-armv6 "https://github.com/tianon/gosu/releases/download/1.11/gosu-armel"  && \
+    curl -L -o gosu-linux-armv7 "https://github.com/tianon/gosu/releases/download/1.11/gosu-armhf" && \
     mv gosu-amd64 /bin/gosu && \
-    chmod 755 /bin/gosu && \
-    chmod +s /bin/gosu && \
+    chmod 755 gosu-linux-* && \
+    chmod +s gosu-linux-* && \
     addgroup -S apache ${NAGIOS_CMDGROUP}
    
     
