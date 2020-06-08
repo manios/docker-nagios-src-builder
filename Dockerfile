@@ -36,7 +36,7 @@ RUN addgroup -S ${NAGIOS_GROUP} && \
     curl -L -o gosu-linux-amd64 "https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64"  && \
     curl -L -o gosu-linux-armv6 "https://github.com/tianon/gosu/releases/download/1.11/gosu-armel"  && \
     curl -L -o gosu-linux-armv7 "https://github.com/tianon/gosu/releases/download/1.11/gosu-armhf" && \
-    mv gosu-amd64 /bin/gosu && \
+    mv gosu-linux-* /bin/ && \
     chmod 755 gosu-linux-* && \
     chmod +s gosu-linux-* && \
     addgroup -S apache ${NAGIOS_CMDGROUP}
